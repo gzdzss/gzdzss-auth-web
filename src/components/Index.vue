@@ -3,15 +3,16 @@
         这个是首页<br>
         token:{{accessToken}}
         <br>
-        <a v-if="!accessToken" href="/login">去登录</a>
         <p style="color:red" v-show="httpError.hasError">{{httpError.status}} | {{httpError.statusText}}</p>
-        <button v-if="accessToken" type="button" @click="orderList">查看订单列表</button>
-        <button v-if="accessToken" type="button" @click="logout">退出登录</button>
+        <button  type="button" @click="test">test</button> <br>
+        <button v-if="accessToken" type="button" @click="logout">logout</button>
+
+        <a v-if="!accessToken" href="/login">去登录</a>
     </div>
 </template>
 
 <script>
-    import {list} from '@/api/orderApi'
+    import {test} from '@/api/testApi'
     import {mapActions} from 'vuex'
     export default {
         name: 'Index',
@@ -28,8 +29,8 @@
                 'handleLogout'
             ]),
 
-            orderList() {
-                list().then(res => {
+            test() {
+                test().then(res => {
                     alert(res.data)
                 })
             },
@@ -46,6 +47,7 @@
                     })
                 }
             }
+
         }
     }
 </script>

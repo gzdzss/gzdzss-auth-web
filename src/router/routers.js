@@ -14,7 +14,17 @@ export default [
             title: '登录',
         },
         component: () => import('@/components/Login')
-    }, {
+    },
+    {
+        path: '/oauth2',
+        name: 'Oauth',
+        meta: {
+            title: 'Oauth2认证',
+        },
+        component: () => import('@/components/Oauth2')
+    },
+
+    {
         path: '/404',
         name: 'Page404',
         meta: {

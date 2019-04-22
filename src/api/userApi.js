@@ -1,43 +1,33 @@
 import request from '@/request'
-import config from '@/config'
-
-const {oauth2client} = config
+import qs from 'qs'
 
 export const login = ({username, password}) => {
     const param = {
-        'grant_type': 'password',
         'username': username,
-        'password': password,
-        'scope': 'login userinfo'
+        'password': password
     }
     return request({
-        url: "/api/auth/oauth/token",
+        url: "/api/auth/login",
         method: 'post',
-        params: param,
-        auth: oauth2client
+        params: param
     });
 }
 
-export const logout = () => {
+
+export const authorize = (param) => {
     return request({
-        url: "/api/auth/revoke",
-        method: 'post'
+        url: "/api/auth/oauth2/authorize",
+        method: 'get',
+        params: param
     });
 }
 
-
-export const refreshToken = (refresh_token) => {
-    const param = {
-        'grant_type': 'refresh_token',
-        'refresh_token': refresh_token,
-    }
-    return request({
-        url: "/api/auth/oauth/token",
-        method: 'post',
-        params: param,
-        auth: oauth2client
-    });
+export const authorizeApprove = (param) => {
+   return request.post("/api/auth/oauth2/authorize/approve", qs.stringify(param,  {indices: false}))
 }
+
+
+
 
 
 

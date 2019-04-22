@@ -32,9 +32,13 @@
             ]),
             login() {
                 this.handleLogin(this.loginForm).then(()=> {
-                    this.$router.push({
-                        name: 'Index'
-                    })
+                    if (this.$route.query.redirect === location.hostname) {
+                        this.$router.go(-1)
+                    } else {
+                        this.$router.push({
+                            name: 'Index'
+                        })
+                    }
                 })
             }
         }
