@@ -79,16 +79,20 @@
                 }
                 this.oauth2Param.scope = scope;
                 authorizeApprove(this.oauth2Param).then(res => {
-                    let responseType = res.data.responseType;
-                    let redirectUri = res.data.redirectUri;
-                    let code = res.data.code;
-                    if (responseType === 'code') {
-                        window.location.href = redirectUri + "?code=" + code;
+                    let response_type = res.data.response_type;
+                    let redirect_uri = res.data.redirect_uri;
+                    let state = res.data.state;
+                    if (response_type === 'code') {
+                        let code = res.data.code;
+                        window.location.href = redirect_uri + "?code=" + code + "&response_type=" + response_type + "&state=" + state;
                     } else {
-                        let token = res.data.access_token;
+                        let scope = res.data.scope;
+                        let access_token = res.data.access_token;
                         let token_type = res.data.token_type;
                         let expires_in = res.data.expires_in;
-                        window.location.href = redirectUri + "?access_token=" + token + "&token_type=" + token_type + "&expires_in=" + expires_in;
+                        let refresh_token = res.data.refresh_token;
+                        window.location.href = redirect_uri + "?access_token=" + access_token + "&response_type=" + response_type + "&token_type=" + token_type + "&expires_in="
+                            + expires_in + "&state=" + state + "&refresh_token=" + refresh_token + "&scope=" + scope;
                     }
                 })
 
