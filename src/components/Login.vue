@@ -1,6 +1,7 @@
 <template>
     <div>
         <p style="color:red" v-show="httpError.hasError">{{httpError.status}} | {{httpError.statusText}}</p>
+        <h1>gzDzss认证中心</h1>
         <form>
             <label>用户名<input type="text" autocomplete="username" v-model="loginForm.username" placeholder="用户名"/></label><br>
             <label>密码<input type="password" autocomplete="current-password" v-model="loginForm.password"

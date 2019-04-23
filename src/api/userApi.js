@@ -13,6 +13,13 @@ export const login = ({username, password}) => {
     });
 }
 
+export const logout = () => {
+    return request({
+        url: "/api/auth/logout",
+        method: 'get',
+    });
+}
+
 
 export const authorize = (param) => {
     return request({

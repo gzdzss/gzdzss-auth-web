@@ -1,7 +1,6 @@
 <template>
 
     <div>
-
         <span v-if="!checkParam">缺少必要参数!</span>
         <div v-else>
             <p style="color:red" v-if="httpError.hasError">{{httpError.status}} | {{httpError.statusText}}</p>
@@ -47,16 +46,11 @@
             }
         },
         mounted() {
-            let client_id = this.$route.query.client_id;
-            let redirect_uri = this.$route.query.redirect_uri;
-            let response_type = this.$route.query.response_type;
-            let state = this.$route.query.state;
-            this.oauth2Param.client_id = client_id;
-            this.oauth2Param.redirect_uri = redirect_uri;
-            this.oauth2Param.response_type = response_type;
-            this.oauth2Param.state = state;
-
-            if (client_id && redirect_uri && response_type) {
+            this.oauth2Param.client_id = this.$route.query.client_id;
+            this.oauth2Param.redirect_uri = this.$route.query.redirect_uri;
+            this.oauth2Param.response_type = this.$route.query.response_type;
+            this.oauth2Param.state = this.$route.query.state;
+            if (this.oauth2Param.client_id && this.oauth2Param.redirect_uri && this.oauth2Param.response_type) {
                 this.checkParam = true;
                 authorize(this.oauth2Param).then(res => {
                     this.authorize = res.data;
@@ -85,8 +79,17 @@
                 }
                 this.oauth2Param.scope = scope;
                 authorizeApprove(this.oauth2Param).then(res => {
-                    console.log(res)
-                    alert('授权成功')
+                    let responseType = res.data.responseType;
+                    let redirectUri = res.data.redirectUri;
+                    let code = res.data.code;
+                    if (responseType === 'code') {
+                        window.location.href = redirectUri + "?code=" + code;
+                    } else {
+                        let token = res.data.access_token;
+                        let token_type = res.data.token_type;
+                        let expires_in = res.data.expires_in;
+                        window.location.href = redirectUri + "?access_token=" + token + "&token_type=" + token_type + "&expires_in=" + expires_in;
+                    }
                 })
 
             }

@@ -1,4 +1,4 @@
-import {login} from '@/api/userApi'
+import {login, logout} from '@/api/userApi'
 import {clearStorageToken, getStorageAccessToken, jointAccessToken, setStorageToken} from '@/util'
 
 export default {
@@ -27,7 +27,17 @@ export default {
             })
         },
         handleLogout({commit}) {
-            commit('clearToken')
+            if (getStorageAccessToken() !== null) {
+                return new Promise((resolve, reject) => {
+                    logout().then(() => {
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    }).finally(()=>{
+                        commit('clearToken')
+                    })
+                })
+            }
         }
     }
 }
