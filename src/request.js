@@ -46,7 +46,7 @@ service.interceptors.response.use(
                 statusText: statusText
             }
             store.commit('ON_HTTP_ERROR', error)
-            if (e.response.status === 403) {
+            if (e.response.status === 401) {
                 store.commit('clearToken');
             }
         } else if (e && e.message) {

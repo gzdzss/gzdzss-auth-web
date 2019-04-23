@@ -55,7 +55,7 @@
                 authorize(this.oauth2Param).then(res => {
                     this.authorize = res.data;
                 }).catch(e => {
-                    if (e && e.response && e.response.status === 403) {
+                    if (e && e.response && e.response.status === 401) {
                         this.$router.push({
                             name: 'Login',
                             query: {redirect: location.hostname}
