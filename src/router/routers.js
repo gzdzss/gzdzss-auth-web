@@ -17,7 +17,7 @@ export default [
     },
     {
         path: '/oauth2',
-        name: 'Oauth',
+        name: 'Oauth2',
         meta: {
             title: 'Oauth2认证',
         },

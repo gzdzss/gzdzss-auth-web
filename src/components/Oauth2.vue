@@ -27,7 +27,7 @@
     import {authorize, authorizeApprove} from '@/api/userApi'
 
     export default {
-        name: "oauth",
+        name: "Oauth2",
         data: () => ({
             checkParam: false,
             authorize: {},
