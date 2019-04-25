@@ -12,7 +12,7 @@ export default {
     },
 
     //存储token的key
-    accessTokenKey: 'gzdzssAccessToken',
+    accessTokenKey: 'gzdzssAuthAccessToken',
     //token过期时间（秒）
-    accessTokenExpiresKey: 'gzdzssAccessTokenExpires'
+    accessTokenExpiresKey: 'gzdzssAuthAccessTokenExpires'
 }
