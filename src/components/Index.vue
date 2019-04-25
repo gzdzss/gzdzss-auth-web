@@ -12,8 +12,16 @@
         <button type="button" @click="testLogin">测试不需要权限，但是逻辑需要获取用户</button>
         <br>
         <button v-if="accessToken" type="button" @click="logout">logout</button>
-
-        <a v-if="!accessToken" href="/login">去登录</a>
+        <br>
+        <br>
+        <a v-if="accessToken" href="/client" >Oauth2客户端配置</a>
+        <br>
+        <hr>
+        <div v-if="!accessToken">
+            <a href="/login">去登录</a> <br>
+            <hr>
+            <a href="/register">去注册</a>
+        </div>
     </div>
 </template>
 
@@ -39,13 +47,10 @@
             nickName() {
                 return this.$store.state.user.nickName
             }
-        }, mounted() {
-            this.handleGetUser()
         },
         methods: {
             ...mapActions([
                 'handleLogout',
-                'handleGetUser',
             ]),
             test() {
                 test().then(res => {

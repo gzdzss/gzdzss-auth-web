@@ -16,12 +16,28 @@ export default [
         component: () => import('@/components/Login')
     },
     {
+        path: '/register',
+        name: 'Register',
+        meta: {
+            title: '注册',
+        },
+        component: () => import('@/components/Register')
+    },
+    {
         path: '/oauth2',
         name: 'Oauth2',
         meta: {
             title: 'Oauth2认证',
         },
         component: () => import('@/components/Oauth2')
+    },
+    {
+        path: '/client',
+        name: 'Client',
+        meta: {
+            title: 'Oauth2客户端',
+        },
+        component: () => import('@/components/Client')
     },
 
     {

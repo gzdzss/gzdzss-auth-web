@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routers'
 import config from '@/config'
+import store from '@/store'
 
 const title = config.title;
 
@@ -30,9 +31,12 @@ router.beforeEach((to, from, next) => {
 
 //全局后置钩子
 router.afterEach(to => {
-    const pageTitle = to.meta.title
-    const resTitle = pageTitle ? `${title} - ${pageTitle}` : title
-    window.document.title = resTitle
+    const pageTitle = to.meta.title;
+    const resTitle = pageTitle ? `${title} - ${pageTitle}` : title;
+    window.document.title = resTitle;
+
+    //路由跳转的时候清空之前的错误
+    store.commit('CLEAR_HTTP_ERROR')
 })
 
 export default router

@@ -8,6 +8,9 @@
                             placeholder="密码"/></label><br>
             <button type="button" @click="login">login</button>
             <br>
+            <br>
+            <br>
+            <a href="/register">还没有账号？去注册</a>
         </form>
     </div>
 </template>

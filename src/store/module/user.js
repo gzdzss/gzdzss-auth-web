@@ -1,4 +1,4 @@
-import {login, logout, getUser} from '@/api/userApi'
+import {getUser, login, logout} from '@/api/userApi'
 import {clearStorageToken, getStorageAccessToken, jointAccessToken, setStorageToken} from '@/util'
 
 export default {
@@ -14,10 +14,10 @@ export default {
             state.accessToken = jointAccessToken(payload)
         },
         clearToken(state) {
-            state.avatarUrl = '',
-            state.nickName = '',
-            state.accessToken = ''
-            state.getuse = false,
+            state.avatarUrl = '';
+            state.nickName = '';
+            state.accessToken = '';
+            state.getuse = false;
             clearStorageToken()
         },
         setUser(state, payload) {
@@ -56,7 +56,7 @@ export default {
                         resolve()
                     }).catch(err => {
                         reject(err)
-                    }).finally(()=>{
+                    }).finally(() => {
                         commit('clearToken')
                     })
                 })

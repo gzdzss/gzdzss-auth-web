@@ -13,6 +13,18 @@ export const login = ({username, password}) => {
     });
 }
 
+export const register = ({username, password}) => {
+    const param = {
+        'username': username,
+        'password': password
+    }
+    return request({
+        url: "/api/auth/user/register",
+        method: 'post',
+        params: param
+    });
+}
+
 export const getUser = () => {
     return request({
         url: "/api/auth/user",
