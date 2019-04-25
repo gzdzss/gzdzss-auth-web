@@ -8,8 +8,6 @@ export const test = () => {
 }
 
 
-
-
 export const adminTest = () => {
     return request({
         url: "/api/auth/adminTest",

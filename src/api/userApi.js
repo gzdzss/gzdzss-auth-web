@@ -13,6 +13,13 @@ export const login = ({username, password}) => {
     });
 }
 
+export const getUser = () => {
+    return request({
+        url: "/api/auth/user",
+        method: 'get',
+    });
+}
+
 export const logout = () => {
     return request({
         url: "/api/auth/logout",

@@ -1,14 +1,15 @@
 <template>
     <div>
-        这个是首页<br>
-        token:{{accessToken}}
+        <div v-if="getUser">
+            Hello： {{nickName}} <img :src="avatarUrl" width="40" height="40"/>
+        </div>
         <br>
         <p style="color:red" v-show="httpError.hasError">{{httpError.status}} | {{httpError.statusText}}</p>
-        <button type="button" @click="test">test</button>
+        <button type="button" @click="test">测试登录可调用</button>
         <br>
-        <button type="button" @click="adminTest">adminTest</button>
+        <button type="button" @click="adminTest">测试无权限调用</button>
         <br>
-        <button type="button" @click="testLogin">testLogin</button>
+        <button type="button" @click="testLogin">测试不需要权限，但是逻辑需要获取用户</button>
         <br>
         <button v-if="accessToken" type="button" @click="logout">logout</button>
 
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-    import {test,adminTest, testLogin} from '@/api/testApi'
+    import {adminTest, test, testLogin} from '@/api/testApi'
     import {mapActions} from 'vuex'
 
     export default {
@@ -28,13 +29,24 @@
             },
             accessToken() {
                 return this.$store.state.user.accessToken
+            },
+            getUser() {
+                return this.$store.state.user.getUser
+            },
+            avatarUrl() {
+                return this.$store.state.user.avatarUrl
+            },
+            nickName() {
+                return this.$store.state.user.nickName
             }
+        }, mounted() {
+            this.handleGetUser()
         },
         methods: {
             ...mapActions([
-                'handleLogout'
+                'handleLogout',
+                'handleGetUser',
             ]),
-
             test() {
                 test().then(res => {
                     alert(JSON.stringify(res.data))
@@ -51,8 +63,6 @@
                     alert(JSON.stringify(res.data))
                 })
             },
-
-
             logout() {
                 if (this.accessToken) {
                     this.handleLogout().then(() => {
@@ -65,8 +75,7 @@
                         name: 'Login'
                     })
                 }
-            }
-
+            },
         }
     }
 </script>
@@ -75,3 +84,4 @@
 <style scoped>
 
 </style>
+
