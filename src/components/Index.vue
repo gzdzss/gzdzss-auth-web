@@ -4,7 +4,12 @@
         token:{{accessToken}}
         <br>
         <p style="color:red" v-show="httpError.hasError">{{httpError.status}} | {{httpError.statusText}}</p>
-        <button  type="button" @click="test">test</button> <br>
+        <button type="button" @click="test">test</button>
+        <br>
+        <button type="button" @click="adminTest">adminTest</button>
+        <br>
+        <button type="button" @click="testLogin">testLogin</button>
+        <br>
         <button v-if="accessToken" type="button" @click="logout">logout</button>
 
         <a v-if="!accessToken" href="/login">去登录</a>
@@ -12,8 +17,9 @@
 </template>
 
 <script>
-    import {test} from '@/api/testApi'
+    import {test,adminTest, testLogin} from '@/api/testApi'
     import {mapActions} from 'vuex'
+
     export default {
         name: 'Index',
         computed: {
@@ -31,9 +37,22 @@
 
             test() {
                 test().then(res => {
-                    alert(res.data)
+                    alert(JSON.stringify(res.data))
                 })
             },
+
+            testLogin() {
+                testLogin().then(res => {
+                    alert(JSON.stringify(res.data))
+                })
+            },
+            adminTest() {
+                adminTest().then(res => {
+                    alert(JSON.stringify(res.data))
+                })
+            },
+
+
             logout() {
                 if (this.accessToken) {
                     this.handleLogout().then(() => {

@@ -30,7 +30,7 @@ export const authorize = (param) => {
 }
 
 export const authorizeApprove = (param) => {
-   return request.post("/api/auth/oauth2/authorize/approve", qs.stringify(param,  {indices: false}))
+   return request.post("/api/auth/oauth2/approve", qs.stringify(param,  {indices: false}))
 }
 
 

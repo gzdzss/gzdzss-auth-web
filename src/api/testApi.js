@@ -9,3 +9,18 @@ export const test = () => {
 
 
 
+
+export const adminTest = () => {
+    return request({
+        url: "/api/auth/adminTest",
+        method: 'get'
+    });
+}
+
+
+export const testLogin = () => {
+    return request({
+        url: "/api/auth/testLogin",
+        method: 'get'
+    });
+}

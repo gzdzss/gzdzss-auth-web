@@ -43,9 +43,21 @@
         computed: {
             httpError() {
                 return this.$store.state.app.httpError;
+            },
+            accessToken() {
+                return this.$store.state.user.accessToken
             }
         },
         mounted() {
+
+            if(!this.accessToken) {
+                this.$router.push({
+                    name: 'Login',
+                    query: {redirect: location.hostname}
+                })
+                return;
+            }
+
             this.oauth2Param.client_id = this.$route.query.client_id;
             this.oauth2Param.redirect_uri = this.$route.query.redirect_uri;
             this.oauth2Param.response_type = this.$route.query.response_type;
